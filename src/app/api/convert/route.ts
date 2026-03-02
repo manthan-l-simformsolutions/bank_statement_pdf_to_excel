@@ -71,11 +71,15 @@ async function parseForm(req: NextRequest): Promise<{ filePath: string; fileName
 async function extractItems(buffer: Buffer): Promise<RawItem[][]> {
     const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
 
-    // Disable the PDF worker for Vercel/serverless environments.
-    // Serverless functions cannot spawn worker threads or load worker files
-    // from disk. Setting workerSrc to "" forces pdfjs to use a fake
-    // in-thread worker so text extraction works without any worker file.
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "";
+    // Point workerSrc to the actual worker file so Node.js worker_threads can
+    // load it. pdfjs-dist is in serverExternalPackages so the full package
+    // (including pdf.worker.mjs) is present in node_modules at runtime on
+    // Vercel. We build a file:// URL from process.cwd() so it resolves
+    // correctly in both local and Vercel (/var/task) environments.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `file://${path.join(
+        process.cwd(),
+        "node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs"
+    )}`;
 
     const uint8Array = new Uint8Array(buffer);
 
