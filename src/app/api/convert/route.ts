@@ -70,6 +70,13 @@ async function parseForm(req: NextRequest): Promise<{ filePath: string; fileName
 // ── Extract all text items with X/Y positions using pdfjs-dist ────────────────
 async function extractItems(buffer: Buffer): Promise<RawItem[][]> {
     const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
+
+    // Disable the PDF worker for Vercel/serverless environments.
+    // Serverless functions cannot spawn worker threads or load worker files
+    // from disk. Setting workerSrc to "" forces pdfjs to use a fake
+    // in-thread worker so text extraction works without any worker file.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "";
+
     const uint8Array = new Uint8Array(buffer);
 
     const loadingTask = pdfjsLib.getDocument({
