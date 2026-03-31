@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-export default function Footer() {
-    const year = new Date().getFullYear();
+const CURRENT_YEAR = new Date().getFullYear();
 
+export default function Footer() {
     return (
         <footer className="border-t border-white/5 py-10 px-4">
             <div className="max-w-5xl mx-auto">
@@ -28,7 +28,7 @@ export default function Footer() {
 
                     {/* Copyright */}
                     <p className="text-slate-600 text-sm">
-                        © {year} BankPDF2Excel. All rights reserved.
+                        © {CURRENT_YEAR} BankPDF2Excel. All rights reserved.
                     </p>
                 </div>
 

@@ -1,5 +1,4 @@
-export default function HowItWorks() {
-    const steps = [
+const steps = [
         {
             number: "1",
             title: "Upload Your PDF",
@@ -30,18 +29,19 @@ export default function HowItWorks() {
                 </svg>
             ),
         },
-    ];
+];
 
-    const columns = [
-        { name: "Date", example: "01/04/24", color: "text-blue-400" },
-        { name: "Narration", example: "UPI-VODAFONE...", color: "text-purple-400" },
-        { name: "Chq/Ref No.", example: "0000445871...", color: "text-yellow-400" },
-        { name: "Value Dt", example: "01/04/24", color: "text-blue-400" },
-        { name: "Withdrawal", example: "157.00", color: "text-red-400" },
-        { name: "Deposit", example: "1,200.00", color: "text-green-400" },
-        { name: "Balance", example: "72,722.82", color: "text-cyan-400" },
-    ];
+const columns = [
+    { name: "Date", example: "01/04/24", color: "text-blue-400" },
+    { name: "Narration", example: "UPI-VODAFONE...", color: "text-purple-400" },
+    { name: "Chq/Ref No.", example: "0000445871...", color: "text-yellow-400" },
+    { name: "Value Dt", example: "01/04/24", color: "text-blue-400" },
+    { name: "Withdrawal", example: "157.00", color: "text-red-400" },
+    { name: "Deposit", example: "1,200.00", color: "text-green-400" },
+    { name: "Balance", example: "72,722.82", color: "text-cyan-400" },
+];
 
+export default function HowItWorks() {
     return (
         <section id="how-it-works" className="px-4 py-20">
             <div className="max-w-5xl mx-auto">
