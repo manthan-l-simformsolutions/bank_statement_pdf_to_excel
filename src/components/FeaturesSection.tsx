@@ -1,5 +1,4 @@
-export default function FeaturesSection() {
-    const features = [
+const features = [
         {
             icon: (
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -72,8 +71,9 @@ export default function FeaturesSection() {
             border: "border-teal-500/20",
             text: "text-teal-400",
         },
-    ];
+];
 
+export default function FeaturesSection() {
     return (
         <section id="features" className="px-4 py-20">
             {/* Orbs */}

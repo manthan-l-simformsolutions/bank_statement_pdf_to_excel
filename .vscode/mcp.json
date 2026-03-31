@@ -1,0 +1,18 @@
+{
+  "servers": {
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "my-mcp-server-a0036099": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/home/manthan/Documents/mcp/local_mcp/index.js"]
+    },
+    "my-mcp-server-8739801d": {
+      "type": "http",
+      "url": "https://custom-mcp-xi.vercel.app/sse"
+    }
+  },
+  "inputs": []
+}

@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import dynamic from "next/dynamic";
 import UploadSection from "@/components/UploadSection";
 import ResultSection from "@/components/ResultSection";
-import FeaturesSection from "@/components/FeaturesSection";
-import HowItWorks from "@/components/HowItWorks";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+
+const FeaturesSection = dynamic(() => import("@/components/FeaturesSection"), { ssr: false });
+const HowItWorks = dynamic(() => import("@/components/HowItWorks"), { ssr: false });
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
 
 export type ConversionResult = {
   blob: Blob;
@@ -68,8 +70,8 @@ export default function Home() {
 
       setProgress(100);
       setResult({ blob, filename, transactionCount });
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       clearInterval(progressInterval);
       setConverting(false);
@@ -84,9 +86,9 @@ export default function Home() {
     setProgress(0);
   }, []);
 
-  const scrollToUpload = () => {
+  const scrollToUpload = useCallback(() => {
     uploadRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-animated">
